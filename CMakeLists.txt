@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(libmpdclient C)
+project(libmpdclient)
 
 SET(CMAKE_C_FLAGS "-std=c11 -O3")
 set(PACKAGE "libmpdclient")
@@ -44,7 +44,6 @@ add_library(mpdclient
 	src/directory.c
 	src/entity.c
 	src/error.c
-	src/example.c
 	src/fd_util.c
 	src/fd_util.h
 	src/fingerprint.c
@@ -151,3 +150,9 @@ target_compile_options(mpdclient PRIVATE
 	-Wcast-qual
 	-Wwrite-strings
 	)
+
+add_executable(libmpdclient_example src/example.c)
+target_link_libraries(libmpdclient_example mpdclient )
+install( TARGETS libmpdclient_example DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
+
+install( TARGETS mpdclient DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )
